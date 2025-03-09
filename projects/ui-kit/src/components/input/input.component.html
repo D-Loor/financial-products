@@ -1,0 +1,37 @@
+<div class="input-content" [formGroup]="formGroup!">
+  <label *ngIf="inputData?.label" class="input-content__label" [for]="inputData?.id">{{
+    inputData?.label
+  }}</label>
+
+  <input
+    class="input-content__input"
+    [ngClass]="{
+      'input-content__input--not-label': !inputData?.label,
+      'input-content__input--small': inputData?.size == 'small'
+    }"
+    [id]="inputData?.id"
+    [type]="inputData?.type === 'password' ? type : inputData?.type"
+    [placeholder]="inputData?.placeholder"
+    [formControlName]="inputData?.formControlName ?? ''"
+    [required]="inputData?.required ?? false"
+    [attr.aria-label]="inputData?.label"
+    [attr.aria-required]="inputData?.required ?? null"
+    (keyup)="inputEvent($event)"
+    (change)="
+      inputData?.type === 'datetime-local' ? inputEvent($event) : null
+    "
+  />
+
+  <span *ngIf="validateInput() && formGroup!.get(inputData!.formControlName)?.errors?.['required']" 
+    class="input-content__error-message">Este campo es requerido!</span>
+  <span *ngIf="validateInput() && formGroup!.get(inputData!.formControlName)?.errors?.['pattern']" 
+    class="input-content__error-message">{{ inputData?.label }} no válido!</span>
+  <span *ngIf="validateInput() && formGroup!.get(inputData!.formControlName)?.errors?.['maxlength']" 
+    class="input-content__error-message">{{ inputData?.label }} debe contener máximo
+    {{formGroup!.get(inputData!.formControlName)?.errors?.['maxlength'].requiredLength}}
+    caracteres!</span>
+  <span *ngIf="validateInput() && formGroup!.get(inputData!.formControlName)?.errors?.['minlength']" 
+    class="input-content__error-message">{{ inputData?.label }} debe contener mínimo 
+    {{formGroup!.get(inputData!.formControlName)?.errors?.['minlength'].requiredLength}}
+    caracteres!</span>
+</div>

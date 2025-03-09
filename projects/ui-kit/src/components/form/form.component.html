@@ -1,0 +1,17 @@
+<div class="form-container">
+  <form action="" [formGroup]="form" aria-label="Data Form">
+    <div class="grid">
+      <div [class]="item.class" *ngFor="let item of formData?.fields">
+        <div class="form-container__field" *ngIf="item.type === 'input' && item.input">
+          <app-input [inputData]="item.input" [formGroup]="form"></app-input>
+        </div>
+      </div>
+      <div class="col-12 form-container__button">
+        <app-button
+          [buttonData]="formData?.buttonForm"
+          (clickEvent)="onSubmit()"
+        ></app-button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,18 @@
+<div class="button-content">
+    <button role="button" class="button-content__button"
+        [ngClass]="{'button-content__button--small': buttonData?.size == 'small',
+            'button-content__button--large': buttonData?.size == 'large',
+            'button-content__button--primary': buttonData?.class == 'primary',
+            'button-content__button--secondary': buttonData?.class == 'secondary',
+            'button-content__button--disabled': buttonData?.disabled}"
+        [disabled]="buttonData?.disabled"
+        [attr.aria-label]="buttonData?.label"
+        [attr.aria-disabled]="buttonData?.disabled ? true : null"
+        [routerLink]="buttonData?.routerLink ? buttonData?.routerLink : null"
+        (click)="clickedEvent()">
+            <span *ngIf="buttonData?.icon" class="button-content__button__icon">
+                <img [src]="buttonData?.icon" alt="button-icon">
+            </span>
+        {{ buttonData?.label }} 
+    </button>
+</div>

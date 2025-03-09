@@ -1,1 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+
+@use '../../ui-kit/src/styles/abstracts/reset';
+@use '../../ui-kit/src/styles/base/typography';
+@use '../../ui-kit/src/styles/base/utilities';
+@use '../../ui-kit/src/styles/base/grid';

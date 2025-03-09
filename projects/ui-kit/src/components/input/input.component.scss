@@ -1,0 +1,43 @@
+@use '../../styles/abstracts/variables' as variables;
+
+.input-content {
+  position: relative;
+
+  &__input {
+    width: 100%;
+    padding: 10px 6px;
+    border: 2px solid #b3b3b3af;
+    border-radius: variables.$global-radius;
+    font-size: 13px;
+    transition: border-color 0.3s;
+    color: variables.$text-color-primary;
+
+    &::placeholder {
+      color: variables.$text-color-secondary;
+    }
+
+    &--small {
+      font-size: 12px;
+    }
+
+    &:focus {
+      border-color: variables.$secondary-color;
+    }
+
+    &:hover {
+      border-color: variables.$secondary-color;
+    }
+
+  }
+
+  &__error-message {
+    color: variables.$error-color;
+    font-size: 12px;
+    padding: 2px 8px 2px 8px;
+    border-color: variables.$error-color;
+  }
+
+  .ng-invalid.ng-touched {
+      border-color: variables.$error-color;
+  }
+}
