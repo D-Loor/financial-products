@@ -1,11 +1,10 @@
-import { Component, inject, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ButtonComponent, CardComponent, IButton, ICard, InputComponent, ToastService } from 'ui-kit';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
-import { FormProductComponent } from "../../components/form-product/form-product.component";
-import { AddProductService } from '../../services/add-product.service';
-import { IProduct } from '../../models/product.model';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
+import { CardComponent, ICard, ToastService } from 'ui-kit';
+import { FormProductComponent } from "../../components/form-product/form-product.component";
+import { IProduct } from '../../models/product.model';
+import { AddProductService } from '../../services/add-product.service';
 
 @Component({
   selector: 'lib-add-product',

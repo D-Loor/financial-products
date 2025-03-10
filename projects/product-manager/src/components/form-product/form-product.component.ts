@@ -21,19 +21,19 @@ export class FormProductComponent implements OnInit, OnChanges, OnDestroy {
   @Output() submitForm: EventEmitter<IProduct> = new EventEmitter<IProduct>();
   private toastService = inject(ToastService);
   private router = inject(Router);
-  private datePipe = inject(DatePipe);
+  datePipe = inject(DatePipe);
   private _verificationProductService = inject(VerificationProductService);
   private destroy$ = new Subject<void>();
 
 
   leftButtonForm: IButton = {
-    class: 'secondary',
+    customClass: 'secondary',
     label: 'Reiniciar',
     disabled: false
   };
 
   rigthButtonForm: IButton = {
-    class: 'primary',
+    customClass: 'primary',
     label: 'Enviar',
     disabled: false
   };

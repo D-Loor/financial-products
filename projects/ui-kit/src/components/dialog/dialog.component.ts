@@ -21,12 +21,12 @@ export class DialogComponent {
   showDialog = false;
 
   buttonLeftData: IButton = {
-    class: "secondary",
+    customClass: "secondary",
     label: "Cancelar",
     disabled: false
   };
   buttonRightData: IButton = {
-    class: "primary",
+    customClass: "primary",
     label: "Confirmar",
     disabled: false
   };

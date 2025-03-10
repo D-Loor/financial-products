@@ -1,11 +1,22 @@
 import { TestBed } from "@angular/core/testing";
 import { CardComponent } from "./card.component";
-import { IButton } from "../../interfaces/button.interface";
+import { IButton, ICard } from "../../interfaces";
+import { ButtonComponent } from "../button/button.component";
+import { ActivatedRoute } from "@angular/router";
+import { of } from "rxjs";
 
 describe('CardComponent', () => {
     beforeEach(async () => {
       await TestBed.configureTestingModule({
         imports: [CardComponent],
+        providers: [
+          {
+            provide: ActivatedRoute,
+            useValue: {
+              params: of({})
+            }
+          }
+        ]
       }).compileComponents();
     });
   
@@ -19,18 +30,24 @@ describe('CardComponent', () => {
       const fixture = TestBed.createComponent(CardComponent);
       const compiled = fixture.nativeElement as HTMLElement;
 
-      const cardData: IButton = {
-        class: 'primary',
-        label: 'test',
-        disabled: false        
+      const cardData: ICard = {
+        header: 'header',
+        component: ButtonComponent,
+        componentInputs: {
+          buttonData:{
+            customClass: "primary",
+            label: "test",
+            disabled: false
+          } as IButton,
+        }
       };
   
       fixture.componentRef.setInput('cardData', cardData);
       fixture.detectChanges();
   
-      const badgeElement = compiled.querySelector('app-button');
+      const buttonElement = compiled.querySelector('app-button');
       
-      expect(badgeElement).toBeTruthy();
+      expect(buttonElement).toBeTruthy();
   
     });
 

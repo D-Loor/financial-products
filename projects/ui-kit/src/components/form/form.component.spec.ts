@@ -45,8 +45,14 @@ describe('FormComponent', () => {
                     } as IInput,
                     validators: [],
                 } as IField],
-                buttonForm: {
-                    class: 'submit',
+                leftButtonForm: {
+                    customClass: 'submit',
+                    label: 'submit',
+                    routerLink: '',
+                    disabled: false,
+                },
+                rigthButtonForm: {
+                    customClass: 'submit',
                     label: 'submit',
                     routerLink: '',
                     disabled: false,

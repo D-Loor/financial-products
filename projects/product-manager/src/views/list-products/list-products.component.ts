@@ -28,7 +28,7 @@ export class ListProductsComponent implements OnInit, OnDestroy {
   private _getProductService = inject(GetProductsService);
   private _deleteProductService = inject(DeleteProductService);
   private destroy$ = new Subject<void>();
-  private productSelected: IProduct;
+  productSelected: IProduct;
 
   inputData: IInput = {
     id: "search",
@@ -41,7 +41,7 @@ export class ListProductsComponent implements OnInit, OnDestroy {
   };
 
   buttonData: IButton = {
-    class: "primary",
+    customClass: "primary",
     label: "Agregar",
     disabled: false
   };

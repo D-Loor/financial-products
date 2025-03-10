@@ -1,12 +1,22 @@
 import { TestBed } from "@angular/core/testing";
 import { DialogComponent } from "./dialog.component";
 import { IDialog } from "../../interfaces/dialog.interface";
+import { ActivatedRoute } from "@angular/router";
+import { of } from "rxjs";
 
 
 describe('DialogComponent', () => {
     beforeEach(async () => {
       await TestBed.configureTestingModule({
         imports: [DialogComponent],
+        providers: [
+          {
+            provide: ActivatedRoute,
+            useValue: {
+              params: of({})
+            }
+          }
+        ]
       }).compileComponents();
     });
   

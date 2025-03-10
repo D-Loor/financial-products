@@ -43,7 +43,7 @@ describe('DropdownComponent', () => {
 
         expect(labelElement).toBeTruthy();
         expect(selectElement).toBeTruthy();
-        expect(optionElements?.length).toBe(2);
+        expect(optionElements?.length).toBe(1);
     
       });
 

@@ -1,8 +1,7 @@
 export interface IButton {
-    class: string,
+    customClass: string,
     size?: string,
     label: string,
     disabled: boolean,
     routerLink?: string,
-    icon?: string
 }
