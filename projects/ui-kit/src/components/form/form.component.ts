@@ -5,6 +5,7 @@ import { ButtonComponent } from "../button/button.component";
 import { InputComponent } from "../input/input.component";
 import { FormService } from '../../services/utils/form.service';
 import { IForm } from '../../interfaces/form.interface';
+import { ToastService } from '../../services';
 
 @Component({
   standalone: true,
@@ -16,6 +17,7 @@ import { IForm } from '../../interfaces/form.interface';
 export class FormComponent implements OnChanges {
   private fb = inject(FormBuilder);
   formService = inject(FormService);
+  private toastService = inject(ToastService);
   @Input() formData: IForm;
 
   form!: FormGroup;
@@ -47,7 +49,7 @@ export class FormComponent implements OnChanges {
     if (this.form.valid) {
       this.formService.sendForm(this.form.value);
     } else {
-      //this.toastService.emitToast("Error", "Inconsistency in fields", "error", true);
+      this.toastService.emitToast("Error", "Inconsistencia en los campos", "error", true);
     }
   }
 

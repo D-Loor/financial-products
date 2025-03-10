@@ -1,5 +1,5 @@
 export interface IDialog {
-    title: string,
+    title?: string,
     description: string,
     labelButtonLeft: string,
     labelButtonRight: string

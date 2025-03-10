@@ -6,3 +6,4 @@ export * from './table/table.component';
 export * from './card/card.component';
 export * from './dialog/dialog.component';
 export * from './toast/toast.component';
+export * from './dropdown/dropdown.component';

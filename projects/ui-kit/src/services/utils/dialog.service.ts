@@ -9,14 +9,7 @@ export class DialogService {
   private dialogSubject = new Subject<IDialog>();
   $dialogData: Observable<IDialog> = this.dialogSubject.asObservable();
 
-  emitDialog(title: string, description: string, labelButtonLeft: string, labelButtonRight: string): void {
-    let dialogData = {
-      title: title,
-      description: description,
-      labelButtonLeft: labelButtonLeft,
-      labelButtonRight: labelButtonRight
-    }
-
-    this.dialogSubject.next(dialogData as IDialog);
+  emitDialog(dialogData: IDialog): void {
+    this.dialogSubject.next(dialogData);
   }
 }

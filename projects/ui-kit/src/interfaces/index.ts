@@ -7,3 +7,4 @@ export * from './card.interface';
 export * from './dialog.interface';
 export * from './table-header.interface';
 export * from './toast.interface';
+export * from './dropdown.interface';

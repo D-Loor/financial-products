@@ -10,14 +10,14 @@
     width: 100%;
     height: 100%;
     background-color: variables.$loader-bg-color;
-    backdrop-filter: blur(5px);
+    z-index: 2;
 
     &__content {
         border-radius: variables.$global-radius;
         background-color: white;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         width: 80%;
-        max-width: 500px;
+        max-width: 360px;
     }
 
     &__header {
@@ -29,7 +29,7 @@
 
     &__title {
         margin: 0;
-        font-size: 1.2rem;
+        font-size: 16px;
         color: #ddd;
     }
 
@@ -38,7 +38,8 @@
     }
 
     &__body {
-        padding: 15px;
+        padding: 20px 20px 30px 20px;
+        font-size: 14px;
     }
 
     &__description {
@@ -46,35 +47,13 @@
     }
 
     &__footer {
-        @include mixins.content-flex(start, flex-end);
-        padding: 10px 15px;
+        @include mixins.content-flex(space-between, flex-end, 12px);
+        padding:15px 20px;
         border-top: 1px solid #ddd;
-    }
 
-    &__button {
-        border-radius: variables.$global-radius;
-        padding: 8px 16px;
-        border: none;
-        cursor: pointer;
-        font-size: 1rem;
-        margin-left: 8px;
-
-        &--left {
-            background-color: variables.$error-color;
-            color: white;
-
-            &:hover {
-                background-color: color.adjust(variables.$error-color, $lightness: -10%);
-            }
-        }
-
-        &--right {
-            background-color: variables.$info-color;
-            color: white;
-
-            &:hover {
-                background-color: color.adjust(variables.$info-color, $lightness: -10%);
-            }
+        app-button {
+            width: 100%;
         }
     }
+
 }

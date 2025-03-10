@@ -7,6 +7,6 @@ export const routes: Routes = [
     },
     {
         path: "**",
-        redirectTo: ""
+        redirectTo: "products"
     }
 ];

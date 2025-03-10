@@ -6,12 +6,16 @@
           <app-input [inputData]="item.input" [formGroup]="form"></app-input>
         </div>
       </div>
-      <div class="col-12 form-container__button">
-        <app-button
-          [buttonData]="formData?.buttonForm"
-          (clickEvent)="onSubmit()"
-        ></app-button>
-      </div>
+    </div>
+    <div class="form-container__buttons">
+      <app-button
+        [buttonData]="formData?.leftButtonForm"
+        (clickEvent)="onSubmit()"
+      ></app-button>
+      <app-button
+        [buttonData]="formData?.rigthButtonForm"
+        (clickEvent)="onSubmit()"
+      ></app-button>
     </div>
   </form>
 </div>

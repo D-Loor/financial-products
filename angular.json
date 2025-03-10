@@ -34,7 +34,12 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "projects/app/src/favicon.ico",
-              "projects/app/src/assets"
+              "projects/app/src/assets",
+              {
+                "glob": "**/*",
+                "input": "projects/ui-kit/src/assets",
+                "output": "/ui-kit/assets"
+              }
             ],
             "styles": [
               "projects/app/src/styles.scss"

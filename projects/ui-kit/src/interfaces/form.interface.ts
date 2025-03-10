@@ -3,5 +3,6 @@ import { IField } from "./field.interface";
 
 export interface IForm{
     fields: IField[],
-    buttonForm: IButton
+    leftButtonForm: IButton,
+    rigthButtonForm: IButton
 }
