@@ -1,19 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ButtonComponent, CardComponent, IButton, ICard, IInput, InputComponent, ITableHeader, TableComponent } from 'ui-kit';
+import { ButtonComponent, CardComponent, DialogComponent, DialogService, IButton, ICard, IDialog, IInput, InputComponent, ITableHeader, TableComponent, ToastService } from 'ui-kit';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { GetProductsService } from '../../services/get-products.service';
+import { IProductGetResponse } from '../../models/product-get-response.model';
+import { IProduct } from '../../models/product.model';
+import { DeleteProductService } from '../../services/delete-product.service';
+import { Subject, takeUntil } from 'rxjs';
+import { ProductDataService } from '../../services/utils/product-data.service';
 
 @Component({
   selector: 'lib-list-products',
   standalone: true,
-  imports: [CommonModule, TableComponent, InputComponent, ButtonComponent, CardComponent],
+  imports: [CommonModule, TableComponent, InputComponent, ButtonComponent, CardComponent, DialogComponent],
   templateUrl: './list-products.component.html',
   styleUrls: ['./list-products.component.scss']
 })
-export class ListProductsComponent {
+export class ListProductsComponent implements OnInit, OnDestroy {
   cardData: ICard = {};
   searchFormGroup = new FormGroup({'search': new FormControl()});
+  presentDialog: boolean = false;
+  private router = inject(Router);
+  private toastService = inject(ToastService);
+  private dialogService = inject(DialogService);
+  private productDataService = inject(ProductDataService);
+  private _getProductService = inject(GetProductsService);
+  private _deleteProductService = inject(DeleteProductService);
+  private destroy$ = new Subject<void>();
+  private productSelected: IProduct;
 
   inputData: IInput = {
     id: "search",
@@ -63,34 +78,67 @@ export class ListProductsComponent {
     }
   ]
 
-  tableBody = [
-    {
-      id: "dos",
-      name: "Nombre producto",
-      description: "Descripción producto",
-      logo: "assets-1.png",
-      date_release: "2025-01-01",
-      date_revision: "2025-01-01"
-    },
-    {
-      id: "tres",
-      name: "Nombre producto2",
-      description: "Descripción producto2",
-      logo: "assets-2.png",
-      date_release: "2025-01-01",
-      date_revision: "2025-01-01"
-    }
-  ];
+  tableBody: IProduct[] = [];
 
-  constructor(private router: Router) {
+  ngOnInit(): void {
+    this.getProducts();
   }
 
-  onButtonClick(): void {
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  getProducts():void {
+    this._getProductService.get().pipe(takeUntil(this.destroy$)).subscribe((response: IProductGetResponse) => {
+      this.tableBody = response.data;
+    });
+  }
+
+  deleteProduct(productId: string): void {
+    this._deleteProductService.delete(productId).pipe(takeUntil(this.destroy$)).subscribe((response) => {
+      if("Product removed successfully" === response.message) {
+        this.presentDialog = false;
+        this.toastService.emitToast("Success", "Producto eliminado con éxito!", "success", true);
+        this.getProducts();
+      }
+    });
+  }
+
+  addButtonClick(): void {
     this.router.navigate(['/products/add']);
   }
 
-  editItem(event: any): void {
-    console.log(event);
+  optionClicked(event: any): void {
+    this.productSelected = event.item as IProduct;
+
+    switch(event.option) {
+      case "edit":
+        this.productDataService.sendData(this.productSelected);
+        this.router.navigate(['/products/edit']);
+        break;
+      case "delete":
+        this.showDialog(event.item);
+        break;
+    }
+  }
+
+  showDialog(data: any): void {
+    this.presentDialog = true;
+    let dialogData: IDialog = {
+      description: "¿Estás seguro de eliminar el producto " + data.name + "?",
+      labelButtonLeft: "Cancelar",
+      labelButtonRight: "Confirmar"
+    };
+    this.dialogService.emitDialog(dialogData);
+  }
+
+  onClickCancelDialog(): void {
+    this.presentDialog = false;
+  }
+
+  onClickConfirmDialog(): void {
+    this.deleteProduct(this.productSelected.id);
   }
 
 }
